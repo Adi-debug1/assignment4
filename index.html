@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASSIGNMENT 4</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9; /* Light grey background */
+        }
+
+        h2 {
+            margin-top: 30px;
+            color: #333; /* Dark grey heading text */
+            border-bottom: 2px solid #4696a1; /* Green bottom border */
+            padding-bottom: 5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555; /* Slightly darker grey label text */
+        }
+
+        input {
+            width: 300px; /* Increased input box size */
+            padding: 10px; /* Increased padding */
+            margin-bottom: 15px; /* Increased margin */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 12px 20px; /* Increased button padding */
+            cursor: pointer;
+            background-color: #4696a1; /* Green button background */
+            color: white; /* White button text */
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease; /* Smooth transition */
+        }
+
+        button:hover {
+            background-color: #3e8e41; /* Darker green on hover */
+        }
+
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin-top: 20px; /* Increased margin */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for table */
+            background-color: white; /* White table background */
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 12px; /* Increased padding */
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            color: #333; /* Dark grey th text */
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 10px 0; /* Increased padding */
+            border-bottom: 1px solid #eee; /* Light border between list items */
+        }
+
+        li:last-child {
+            border-bottom: none; /* No border for the last item */
+        }
+
+        .error {
+            color: red;
+            margin-top: 5px; /* Added margin */
+            display: block; /* Display as block */
+        }
+
+        #chatArea {
+            height: 300px; /* Increased height */
+            overflow-y: scroll;
+            border: 1px solid #ccc;
+            padding: 15px; /* Increased padding */
+            margin-bottom: 15px; /* Increased margin */
+            background-color: white; /* White chat area background */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for chat area */
+        }
+
+        #chatInput {
+            width: 400px; /* Increased input size */
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>A. Variables, Functions, Conditions, and Loops</h2>
+    <div id="calculator">
+        <h3>BMI Calculator</h3>
+        <label for="weight">Weight (kg):</label>
+        <input type="number" id="weight">
+        <br>
+        <label for="height">Height (m):</label>
+        <input type="number" id="height">
+        <br>
+        <button onclick="calculateAndDisplayBMI()">Calculate BMI</button>
+        <p id="bmiResult"></p>
+    </div>
+
+    <div id="converter">
+        <h3>Temperature Converter</h3>
+        <label for="celsius">Celsius:</label>
+        <input type="number" id="celsius">
+        <br>
+        <button onclick="convertAndDisplayTemp()">Convert to Fahrenheit</button>
+        <p id="fahrenheitResult"></p>
+    </div>
+
+    <div id="validation">
+        <h3>Input Validation</h3>
+        <label for="inputVal">Enter a value:</label>
+        <input type="text" id="inputVal">
+        <br>
+        <button onclick="validateAndDisplayInput()">Validate Input</button>
+        <p id="validationResult"></p>
+    </div>
+
+    <div id="dynamicTable">
+        <h3>Dynamic User Table</h3>
+        <button onclick="generateAndDisplayTable()">Generate Table</button>
+        <div id="userTable"></div>
+    </div>
+
+    <h2>B. Pop-up Boxes</h2>
+    <form id="myForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required>
+        <br>
+        <input type="submit" value="Submit Form">
+    </form>
+
+    <button onclick="deleteItem()">Delete Item from List</button>
+    <ul id="myList">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ul>
+
+    <button onclick="promptForInput()">Get User Input</button>
+    <p id="userInputDisplay"></p>
+
+    <h2>C. Event Handling & DOM Manipulation</h2>
+    <button id="changeTextBtn">Change Text</button>
+    <p id="textParagraph">This is some text.</p>
+
+    <div id="hoverDiv" style="background-color: lightgreen; padding: 20px;">
+        Hover over me
+    </div>
+
+    <div id="dynamicListDiv">
+        <input type="text" id="listItemInput">
+        <button onclick="addListItem()">Add Item</button>
+        <button onclick="removeListItem()">Remove Item</button>
+        <ul id="itemList"></ul>
+    </div>
+
+    <h2>D. Forms & Validation</h2>
+    <form id="registrationForm">
+        <label for="regName">Name:</label><br>
+        <input type="text" id="regName" name="regName"><br>
+        <p id="nameError" class="error"></p>
+
+        <label for="regEmail">Email:</label><br>
+        <input type="email" id="regEmail" name="regEmail"><br>
+        <p id="emailError" class="error"></p>
+
+        <label for="regPhone">Phone Number:</label><br>
+        <input type="text" id="regPhone" name="regPhone"><br>
+        <p id="phoneError" class="error"></p>
+
+        <label for="regPassword">Password:</label><br>
+        <input type="password" id="regPassword" name="regPassword"><br>
+        <p id="passwordError" class="error"></p>
+
+        <input type="submit" value="Register">
+    </form>
+
+    <h2>E. JavaScript Standard Objects & AJAX</h2>
+    <div id="dateTimeDisplay">
+        <h3>Date and Time</h3>
+        <button onclick="displayDateTime()">Show Date & Time</button>
+        <p id="dateTime"></p>
+    </div>
+
+    <div id="randomNumberDisplay">
+        <h3>Random Number</h3>
+        <button onclick="displayRandomNumber()">Generate Random Number</button>
+        <p id="randomNumber"></p>
+    </div>
+
+    <div id="weatherDisplay">
+        <h3>Weather Data</h3>
+        <button onclick="fetchAndDisplayWeather()">Fetch Weather Data</button>
+        <p id="weather"></p>
+    </div>
+
+    <h2>Advanced Topics</h2>
+    <div id="todoApp">
+        <h3>To-Do List</h3>
+        <input type="text" id="todoInput">
+        <button onclick="addTodoItem()">Add</button>
+        <ul id="todoList"></ul>
+    </div>
+
+    <div id="chatbot">
+        <h3>Simple Chatbot</h3>
+        <div id="chatArea"></div>
+        <input type="text" id="chatInput">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <script>
+        // A. Variables, Functions, Conditions, and Loops
+        function calculateAndDisplayBMI() {
+            let weight = parseFloat(document.getElementById("weight").value);
+            let height = parseFloat(document.getElementById("height").value);
+            if (!isNaN(weight) && !isNaN(height) && height > 0) {
+                let bmi = weight / (height * height);
+                document.getElementById("bmiResult").textContent = "BMI: " + bmi.toFixed(2);
+            } else {
+                document.getElementById("bmiResult").textContent = "Invalid input";
+            }
+        }
+
+        function convertAndDisplayTemp() {
+            let celsius = parseFloat(document.getElementById("celsius").value);
+            if (!isNaN(celsius)) {
+                let fahrenheit = (celsius * 9 / 5) + 32;
+                document.getElementById("fahrenheitResult").textContent = fahrenheit.toFixed(2) + " °F";
+            } else {
+                document.getElementById("fahrenheitResult").textContent = "Invalid input";
+            }
+        }
+
+        function validateAndDisplayInput() {
+            let value = document.getElementById("inputVal").value;
+            let message = "";
+            if (value === "") {
+                message = "Input is required";
+            } else if (isNaN(value)) {
+                message = "Input must be a number";
+            } else {
+                message = "Valid input";
+            }
+            document.getElementById("validationResult").textContent = message;
+        }
+
+        function generateAndDisplayTable() {
+            let users = [{
+                name: "Alice",
+                age: 25
+            }, {
+                name: "Bob",
+                age: 30
+            }, {
+                name: "Charlie",
+                age: 28
+            }];
+            let table = "<table><tr><th>Name</th><th>Age</th></tr>";
+            for (let i = 0; i < users.length; i++) {
+                table += "<tr><td>" + users[i].name + "</td><td>" + users[i].age + "</td></tr>";
+            }
+            table += "</table>";
+            document.getElementById("userTable").innerHTML = table;
+        }
+
+        // B. Pop-up Boxes
+        document.getElementById("myForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            alert("Form submitted!");
+        });
+
+        function deleteItem() {
+            let confirmed = confirm("Are you sure you want to delete an item?");
+            if (confirmed) {
+                let list = document.getElementById("myList");
+                if (list.lastChild) {
+                    list.removeChild(list.lastChild);
+                }
+            }
+        }
+
+        function promptForInput() {
+            let input = prompt("Please enter some text:");
+            if (input) {
+                document.getElementById("userInputDisplay").textContent = "You entered: " + input;
+            }
+        }
+
+        // C. Event Handling & DOM Manipulation
+        document.getElementById("changeTextBtn").addEventListener("click", function() {
+            document.getElementById("textParagraph").textContent = "The text has been changed!";
+        });
+
+        document.getElementById("hoverDiv").addEventListener("mouseover", function() {
+            this.style.backgroundColor = "yellow";
+        });
+
+        document.getElementById("hoverDiv").addEventListener("mouseout", function() {
+            this.style.backgroundColor = "lightgreen";
+        });
+
+        function addListItem() {
+            let input = document.getElementById("listItemInput").value;
+            if (input) {
+                let li = document.createElement("li");
+                li.textContent = input;
+                document.getElementById("itemList").appendChild(li);
+                document.getElementById("listItemInput").value = "";
+            }
+        }
+
+        function removeListItem() {
+            let list = document.getElementById("itemList");
+            if (list.lastChild) {
+                list.removeChild(list.lastChild);
+            }
+        }
+
+        // D. Forms & Validation
+        document.getElementById("registrationForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let name = document.getElementById("regName").value;
+            let email = document.getElementById("regEmail").value;
+            let phone = document.getElementById("regPhone").value;
+            let password = document.getElementById("regPassword").value;
+            let isValid = true;
+
+            // Reset error messages
+            document.getElementById("nameError").textContent = "";
+            document.getElementById("emailError").textContent = "";
+            document.getElementById("phoneError").textContent = "";
+            document.getElementById("passwordError").textContent = "";
+
+            if (name === "") {
+                document.getElementById("nameError").textContent = "Name is required";
+                isValid = false;
+            }
+
+            let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                document.getElementById("emailError").textContent = "Invalid email format";
+                isValid = false;
+            }
+
+            let phoneRegex = /^\d{10}$/; // Basic 10-digit phone number validation
+            if (!phoneRegex.test(phone)) {
+                document.getElementById("phoneError").textContent = "Invalid phone number";
+                isValid = false;
+            }
+
+            let passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+            if (!passwordRegex.test(password)) {
+                document.getElementById("passwordError").textContent = "Password must be at least 8 characters and contain at least one uppercase letter, one lowercase letter, one number, and one special character.";
+                isValid = false;
+            }
+
+            if (isValid) {
+                alert("Registration successful!");
+                this.reset(); // Clear the form
+            }
+        });
+
+        // E. JavaScript Standard Objects & AJAX
+        function displayDateTime() {
+            document.getElementById("dateTime").textContent = new Date();
+        }
+
+        function displayRandomNumber() {
+            let min = 1;
+            let max = 100;
+            let randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+            document.getElementById("randomNumber").textContent = "Random Number: " + randomNumber;
+        }
+
+        function fetchAndDisplayWeather() {
+            const apiKey = "YOUR_API_KEY"; // Replace with your OpenWeather API key
+            const city = "London"; // You can change the city
+
+            fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`)
+                .then(response => response.json())
+                .then(data => {
+                    const temp = (data.main.temp - 273.15).toFixed(2); // Convert from Kelvin to Celsius
+                    const description = data.weather[0].description;
+                    document.getElementById("weather").innerHTML = `Temperature: ${temp}°C, Description: ${description}`;
+                })
+                .catch(error => {
+                    console.error("Error fetching weather data:", error);
+                    document.getElementById("weather").textContent = "Error fetching weather data.";
+                });
+        }
+
+        // Advanced Topics
+        // To-Do List
+        function addTodoItem() {
+            let input = document.getElementById("todoInput").value;
+            if (input) {
+                let li = document.createElement("li");
+                li.textContent = input;
+
+                let deleteButton = document.createElement("button");
+                deleteButton.textContent = "Delete";
+                deleteButton.onclick = function() {
+                    li.remove();
+                };
+
+                let completeButton = document.createElement("button");
+                completeButton.textContent = "Complete";
+                completeButton.onclick = function() {
+                    li.classList.toggle("completed");
+                };
+
+                li.appendChild(deleteButton);
+                li.appendChild(completeButton);
+                document.getElementById("todoList").appendChild(li);
+                document.getElementById("todoInput").value = "";
+            }
+        }
+
+        // Chatbot
+        function sendMessage() {
+            let input = document.getElementById("chatInput").value;
+            if (input) {
+                let chatArea = document.getElementById("chatArea");
+                let userDiv = document.createElement("div");
+                userDiv.textContent = "You: " + input;
+                chatArea.appendChild(userDiv);
+
+                // Simple chatbot logic
+                let response = "";
+                if (input.toLowerCase().includes("hello")) {
+                    response = "Chatbot: Hello there!";
+                } else if (input.toLowerCase().includes("how are you")) {
+                    response = "Chatbot: I'm doing well, thank you!";
+                } else {
+                    response = "Chatbot: I'm not sure I understand.";
+                }
+
+                let botDiv = document.createElement("div");
+                botDiv.textContent = response;
+                chatArea.appendChild(botDiv);
+                document.getElementById("chatInput").value = "";
+
+                // Scroll to the bottom of the chat area
+                chatArea.scrollTop = chatArea.scrollHeight;
+            }
+        }
+    </script>
+
+</body>
+
+</html>
